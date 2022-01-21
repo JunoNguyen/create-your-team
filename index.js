@@ -7,6 +7,8 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+let newMember = [];
+
 const team = [
     {
         type: 'input',
@@ -49,21 +51,46 @@ const team = [
     }
 ];
 
-const printCard = inquirer
+const addMore = [
+    {
+        type:'list',
+        message: 'Would you like to add more members?',
+        name: 'more',
+        choices: ['Yes','No'],
+    }
+]
+
+function test() {
+    makeMember();
+}
+
+function makeMember() {
+    inquirer
     .prompt(team)
     .then((response) => {
-        let newMember;
+        // let newMember= [];
         if (response.position.toLowerCase() === "engineer") {
-            newMember = new Engineer(response.name, response.id, response.email);
+            newMember.push(new Engineer(response.name, response.id, response.email));
         } else if (response.position.toLowerCase() === "intern") {
-            newMember = new Intern(response.name, response.id, response.email);
+            newMember.push(new Intern(response.name, response.id, response.email));
         } else if (response.position.toLowerCase() === "manager") {
-            newMember = new Manager(response.name, response.id, response.email);
+            newMember.push(new Manager(response.name, response.id, response.email));
         }
-        console.log(newMember);
-        var test = generateTeam(newMember);
-        fs.writeFile('test.html', test, (err) => {
-            err ? console.log(err) : console.log('Team created!')
+        inquirer.prompt(addMore)
+        .then(function(response) {
+            if (response.more.toLowerCase() === 'yes') {
+                makeMember();
+            } else {
+                printCard();
+            }
         })
     });
-    
+};
+
+function printCard() {
+    fs.writeFile('test.html', generateTeam(newMember), (err) => {
+        err ? console.log(err) : console.log('Success')
+    })
+};
+
+test();
