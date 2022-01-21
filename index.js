@@ -58,23 +58,18 @@ const addMore = [
         name: 'more',
         choices: ['Yes','No'],
     }
-]
-
-function test() {
-    makeMember();
-}
+];
 
 function makeMember() {
     inquirer
     .prompt(team)
     .then((response) => {
-        // let newMember= [];
         if (response.position.toLowerCase() === "engineer") {
-            newMember.push(new Engineer(response.name, response.id, response.email));
+            newMember.push(new Engineer(response.name, response.id, response.email, response.github));
         } else if (response.position.toLowerCase() === "intern") {
-            newMember.push(new Intern(response.name, response.id, response.email));
+            newMember.push(new Intern(response.name, response.id, response.email, response.school));
         } else if (response.position.toLowerCase() === "manager") {
-            newMember.push(new Manager(response.name, response.id, response.email));
+            newMember.push(new Manager(response.name, response.id, response.email, response.office));
         }
         inquirer.prompt(addMore)
         .then(function(response) {
@@ -93,4 +88,4 @@ function printCard() {
     })
 };
 
-test();
+makeMember();
