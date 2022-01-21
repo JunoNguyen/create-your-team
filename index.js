@@ -2,6 +2,10 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const jest = require('jest');
 const generateTeam = require('./src/page-template');
+const Employee = require('./lib/Employee');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 
 const team = [
     {
@@ -48,9 +52,13 @@ const team = [
 const printCard = inquirer
     .prompt(team)
     .then((response) => {
-        console.log(response)
-        if(response.position.toLowerCase() === 'manager') {
-            var manager = generateTeam(response);
-            console.log(manager);
+        let newMember;
+        if (response.position.toLowerCase() === "engineer") {
+            newMember = new Engineer(response.name, response.id, response.email);
+        } else if (response.position.toLowerCase() === "intern") {
+            newMember = new Intern(response.name, response.id, response.email);
+        } else if (response.position.toLowerCase() === "manager") {
+            newMember = new Manager(response.name, response.id, response.email);
         }
-    })
+    });
+    
