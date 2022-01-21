@@ -60,6 +60,7 @@ const printCard = inquirer
         } else if (response.position.toLowerCase() === "manager") {
             newMember = new Manager(response.name, response.id, response.email);
         }
+        console.log(newMember);
         var test = generateTeam(newMember);
         fs.writeFile('test.html', test, (err) => {
             err ? console.log(err) : console.log('Team created!')
