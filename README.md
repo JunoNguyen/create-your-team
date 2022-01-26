@@ -14,12 +14,13 @@ Table of Contents
 
 [License](#creative-commons)
 
-[GitHub Repo](https://github.com/JunoNguyen/team-profile-gen)
+[GitHub Repo](https://github.com/JunoNguyen/create-your-team)
+[Video Demo](https://www.youtube.com/watch?v=wykzYe2MR5E)
 
     AS a manager, I want to put together a team and have access to their information SO that I can have an efficient way to track and contact my team
 ## Description
     This project will create employee cards based off of the information you input. You can link GitHub profiles, and insert your email as well.
-[Video Demonstration](https://youtu.be/txX1tMIF3Ik)
+[Video Demonstration](https://www.youtube.com/watch?v=wykzYe2MR5E)
 ## Usage
     Fork down the repo run "npm i jest" and 'npm i inquirer" within the terminal. Once those are both installed, run "node index.js" within the terminal and answer the questions. When you are done, a "test.html" will be printed with the information that you inputted for the prompts.
 ## Built With

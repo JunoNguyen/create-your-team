@@ -34,7 +34,7 @@ const team = [
     {
         type: 'input',
         message: 'What is your office number?',
-        name: 'office',
+        name: 'officeNumber',
         when: ((response) => response.position.toLowerCase() === 'manager'),
     },
     {
@@ -64,12 +64,13 @@ function makeMember() {
     inquirer
     .prompt(team)
     .then((response) => {
+        // console.log(response.office);
         if (response.position.toLowerCase() === "engineer") {
             newMember.push(new Engineer(response.name, response.id, response.email, response.github));
         } else if (response.position.toLowerCase() === "intern") {
             newMember.push(new Intern(response.name, response.id, response.email, response.school));
         } else if (response.position.toLowerCase() === "manager") {
-            newMember.push(new Manager(response.name, response.id, response.email, response.office));
+            newMember.push(new Manager(response.name, response.id, response.email, response.officeNumber));
         }
         inquirer.prompt(addMore)
         .then(function(response) {
